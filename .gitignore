@@ -1,0 +1,9 @@
+# IDE Files
+/.idea
+*.iml
+
+# Build Output
+/target/
+
+# Database
+/data/
