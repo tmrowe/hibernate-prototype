@@ -53,3 +53,13 @@ you will first need to delete the `./data` directory and then run `docker-compos
 CTRL+D to exit.
 
 Further commands can be found on the [Docker Cheat Sheet](https://www.saltycrane.com/blog/2017/08/docker-cheat-sheet/).
+
+__TODO__
+- Database naming strategy:
+    Camel case -> snake case.
+    lower cased
+    singular
+    Join tables are named after the two tables they join separated by an underscore
+    Using Spring's naming strategy for databases, as defined by these classes:
+        - SpringPhysicalNamingStrategy
+        - SpringImplicitNamingStrategy

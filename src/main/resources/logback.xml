@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable
+            </Pattern>
+        </layout>
+    </appender>
+
+    <!-- Log everything at INFO level by default. -->
+    <root level="INFO">
+        <appender-ref ref="Console" />
+    </root>
+
+    <!-- Log out internal code at TRACE level. -->
+    <logger name="ai.deep6.appservice" level="TRACE" additivity="FALSE">
+        <appender-ref ref="Console" />
+    </logger>
+
+    <logger name="org.springframework" level="INFO" additivity="FALSE">
+        <appender-ref ref="Console" />
+    </logger>
+
+    <logger name="org.hibernate.SQL" level="DEBUG" additivity="FALSE">
+        <appender-ref ref="Console" />
+    </logger>
+
+    <!-- Print parameters for SQL inserts. -->
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" additivity="FALSE">
+        <appender-ref ref="Console" />
+    </logger>
+
+</configuration>
