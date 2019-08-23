@@ -15,8 +15,11 @@ public class AccountJava {
     @Column(unique = true, nullable = false)
     private UUID uuid;
 
+    @Column(unique = true, nullable = false)
+    private String email;
+
     @Column(nullable = false)
-    private Boolean isActive = false;
+    private Boolean active = false;
 
     @CreationTimestamp
     private Timestamp createdAt;
@@ -28,8 +31,12 @@ public class AccountJava {
         return uuid;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public Boolean getActive() {
-        return isActive;
+        return active;
     }
 
     public Timestamp getCreatedAt() {
@@ -44,8 +51,12 @@ public class AccountJava {
         this.uuid = uuid;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setActive(Boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public void setCreatedAt(Timestamp createdAt) {
@@ -60,7 +71,7 @@ public class AccountJava {
     public String toString() {
         return "AccountJava{" +
                 "uuid=" + uuid +
-                ", isActive=" + isActive +
+                ", isActive=" + active +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

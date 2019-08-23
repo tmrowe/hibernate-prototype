@@ -17,9 +17,16 @@ class TestAccount {
     @Test
     fun `create and save Account object with default values set`() {
         val account = Account(
-            isActive = true
+            email = "test123@test.org",
+            active = false
         )
         accountRepository.save(account)
+    }
+
+    @Test
+    fun findByEmail() {
+        val account = accountRepository.findByEmail("test234@test.org")
+        println(account)
     }
 
 }

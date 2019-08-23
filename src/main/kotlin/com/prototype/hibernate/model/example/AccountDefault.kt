@@ -15,8 +15,11 @@ data class AccountDefault (
     @Column(unique = true, nullable = false)
     val uuid : UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
 
+    @Column(unique = true, nullable = false)
+    val email : String,
+
     @Column(nullable = false)
-    val isActive : Boolean = false,
+    val active : Boolean = false,
 
     @CreationTimestamp
     val createdAt : Timestamp = Timestamp(Date().time),

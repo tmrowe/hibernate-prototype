@@ -15,7 +15,8 @@
     <properties>
 
         <!-- Configuration -->
-        <main.class>com.prototype.flyway.Application</main.class>
+        <spring-boot.mainClass>com.prototype.hibernate.Application</spring-boot.mainClass>
+        <main.class>com.prototype.hibernate.Application</main.class>
         <maven.compiler.source>12</maven.compiler.source>
         <maven.compiler.target>12</maven.compiler.target>
 
@@ -32,7 +33,8 @@
         <postgresql.version>9.3-1100-jdbc41</postgresql.version>
         <hibernate.version>5.4.4.Final</hibernate.version>
         <tomcat-dbcp.version>9.0.24</tomcat-dbcp.version>
-        <springfox-swagger.version>2.9.2</springfox-swagger.version>
+        <jackson.version>2.9.9</jackson.version>
+        <swagger.version>2.9.2</swagger.version>
         <slf4j.version>1.7.25</slf4j.version>
         <kotlin.version>1.3.50</kotlin.version>
         <junit.version>4.12</junit.version>
@@ -85,18 +87,26 @@
             <version>${tomcat-dbcp.version}</version>
         </dependency>
 
+        <!-- Jackson -->
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
         <!-- Swagger -->
 
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox-swagger.version}</version>
+            <version>${swagger.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox-swagger.version}</version>
+            <version>${swagger.version}</version>
         </dependency>
 
         <!-- Logging -->

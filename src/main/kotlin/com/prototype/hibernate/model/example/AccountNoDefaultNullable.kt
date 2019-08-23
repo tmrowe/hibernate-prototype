@@ -15,8 +15,11 @@ data class AccountNoDefaultNullable (
     @Column(unique = true, nullable = false)
     val uuid : UUID?,
 
+    @Column(unique = true, nullable = false)
+    val email : String,
+
     @Column(nullable = false)
-    val isActive : Boolean? = false,
+    val active : Boolean = false,
 
     @CreationTimestamp
     val createdAt : Timestamp?,

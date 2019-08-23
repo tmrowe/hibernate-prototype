@@ -13,7 +13,7 @@ import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder
 
 @Configuration
 @EnableTransactionManagement
-class HibernateConfiguration {
+class JPAConfiguration {
 
     @Bean
     fun entityManagerFactory(

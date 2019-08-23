@@ -14,14 +14,16 @@ class TestAccountCreation {
     @Test
     fun `create Account object with default values set`() {
         val account = AccountDefault(
-            isActive = true
+            email = "test456@test.org",
+            active = true
         )
     }
 
     @Test
     fun `create Account object with null values set`() {
         val account = AccountNull(
-            isActive = true
+            email = "test456@test.org",
+            active = true
         )
     }
 
@@ -29,7 +31,8 @@ class TestAccountCreation {
     fun `create Account object with no default values set, not nullable`() {
         val account = AccountNoDefaultNotNullable(
             uuid = UUID.fromString("00000000-0000-0000-0000-000000000000"),
-            isActive = true,
+            email = "test456@test.org",
+            active = true,
             createdAt = Timestamp(Date().time),
             updatedAt = Timestamp(Date().time)
         )
@@ -39,7 +42,8 @@ class TestAccountCreation {
     fun `create Account object with no default values set, is nullable`() {
         val account = AccountNoDefaultNullable(
             uuid = null,
-            isActive = true,
+            email = "test456@test.org",
+            active = true,
             createdAt = null,
             updatedAt = null
         )
