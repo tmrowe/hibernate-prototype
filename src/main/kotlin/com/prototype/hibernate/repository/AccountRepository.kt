@@ -12,6 +12,6 @@ interface AccountRepository : JpaRepository<Account, UUID> {
 
     fun findByActiveTrue(pageable : Pageable) : Page<Account>
     fun findByActiveFalse(pageable : Pageable) : Page<Account>
-    fun findByEmail(email: String) : Optional<Account>
+    fun findByEmail(email : String) : Optional<Account>
 
 }

@@ -2,7 +2,7 @@ package com.prototype.hibernate.model.example;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
 import javax.persistence.*;
 
@@ -22,10 +22,10 @@ public class AccountJava {
     private Boolean active = false;
 
     @CreationTimestamp
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 
     public UUID getUuid() {
         return uuid;
@@ -39,11 +39,11 @@ public class AccountJava {
         return active;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
@@ -59,11 +59,11 @@ public class AccountJava {
         this.active = active;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

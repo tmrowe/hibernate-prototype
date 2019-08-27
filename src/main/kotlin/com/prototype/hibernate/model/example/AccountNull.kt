@@ -2,7 +2,7 @@ package com.prototype.hibernate.model.example
 
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
-import java.sql.Timestamp
+import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
@@ -22,9 +22,9 @@ data class AccountNull (
     val active : Boolean = false,
 
     @CreationTimestamp
-    val createdAt : Timestamp? = null,
+    val createdAt : LocalDateTime? = null,
 
     @UpdateTimestamp
-    val updatedAt : Timestamp? = null
+    val updatedAt : LocalDateTime? = null
 
 )

@@ -5,3 +5,5 @@ CREATE TABLE account (
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
+
+CREATE UNIQUE INDEX email_index ON account(email);

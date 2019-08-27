@@ -4,7 +4,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
-import java.sql.Timestamp
+import java.time.LocalDateTime
 import java.util.*
 
 @SpringBootTest
@@ -33,8 +33,8 @@ class TestAccountCreation {
             uuid = UUID.fromString("00000000-0000-0000-0000-000000000000"),
             email = "test456@test.org",
             active = true,
-            createdAt = Timestamp(Date().time),
-            updatedAt = Timestamp(Date().time)
+            createdAt = LocalDateTime.now(),
+            updatedAt = LocalDateTime.now()
         )
     }
 
