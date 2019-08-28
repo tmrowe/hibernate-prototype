@@ -1,4 +1,4 @@
-package com.prototype.hibernate.model
+package com.prototype.hibernate.model.entity
 
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp

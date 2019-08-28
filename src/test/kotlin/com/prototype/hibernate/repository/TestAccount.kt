@@ -1,7 +1,7 @@
 package com.prototype.hibernate.repository
 
-import com.prototype.hibernate.model.Account
-import junit.framework.Assert.assertEquals
+import com.prototype.hibernate.model.entity.AccountEntity
+import org.junit.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -18,7 +18,7 @@ class TestAccount {
     lateinit var accountRepository : AccountRepository
 
     private val email = "test123@test.com"
-    private val account = Account(
+    private val account = AccountEntity(
         email = email
     )
 

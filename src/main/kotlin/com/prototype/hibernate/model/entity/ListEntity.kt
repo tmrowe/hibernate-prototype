@@ -1,16 +1,15 @@
-package com.prototype.hibernate.model
+package com.prototype.hibernate.model.entity
 
-import org.hibernate.annotations.NaturalId
 import javax.persistence.*
 
 @Entity
-data class List (
+@Table(name = "list")
+data class ListEntity (
 
     @OneToOne(optional = false)
     @JoinColumn
-    var createdBy : Account,
+    var createdBy : AccountEntity,
 
-    @NaturalId
     @Column(
         unique = true,
         nullable = false

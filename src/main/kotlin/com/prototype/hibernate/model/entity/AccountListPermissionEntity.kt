@@ -1,9 +1,10 @@
-package com.prototype.hibernate.model
+package com.prototype.hibernate.model.entity
 
 import javax.persistence.*
 
 @Entity
-data class AccountListPermission (
+@Table(name = "account_list_permission")
+data class AccountListPermissionEntity (
 
     @Column(nullable = false)
     val canViewList : Boolean = false,

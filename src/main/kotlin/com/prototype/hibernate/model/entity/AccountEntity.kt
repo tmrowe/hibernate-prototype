@@ -1,12 +1,11 @@
-package com.prototype.hibernate.model
+package com.prototype.hibernate.model.entity
 
-import org.hibernate.annotations.NaturalId
 import javax.persistence.*
 
 @Entity
-data class Account (
+@Table(name = "account")
+data class AccountEntity (
 
-    @NaturalId
     @Column(
         unique = true,
         nullable = false

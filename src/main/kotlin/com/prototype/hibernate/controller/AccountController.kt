@@ -1,9 +1,9 @@
 package com.prototype.hibernate.controller
 
-import com.prototype.hibernate.model.Account
-import com.prototype.hibernate.repository.AccountRepository
+import com.prototype.hibernate.model.dto.AccountDTO
+import com.prototype.hibernate.model.entity.AccountEntity
+import com.prototype.hibernate.service.IAccountService
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -17,69 +17,81 @@ import java.util.*
     produces = [MediaType.APPLICATION_JSON_VALUE]
 )
 class AccountController(
-    private val accountRepository : AccountRepository
+    private val accountService : IAccountService
 ) {
 
-    @RequestMapping(
-        method = [RequestMethod.GET]
-    )
-    fun getAccounts(
+    @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
+    fun create(
+        @RequestBody accountDTO : AccountDTO
+    ) : AccountEntity {
+        return accountService.create(accountDTO)
+    }
+
+    @GetMapping
+    fun find(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "20") size: Int,
         @RequestParam(defaultValue = "email") sortField: Array<String>,
         @RequestParam(defaultValue = "DESC") sortDirection: Sort.Direction
-    ) : Page<Account> {
-        return accountRepository.findAll(PageRequest.of(page, size, sortDirection, *sortField))
+    ) : Page<AccountEntity> {
+        return accountService.findAll(page, size, sortDirection, sortField)
     }
 
-    @RequestMapping(
-        value = ["/active"],
-        method = [RequestMethod.GET]
-    )
-    fun getActiveAccounts(
+    @GetMapping(value = ["/active"])
+    fun findActive(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "20") size: Int,
         @RequestParam(defaultValue = "email") sortField: Array<String>,
         @RequestParam(defaultValue = "DESC") sortDirection: Sort.Direction
-    ) : Page<Account> {
-        return accountRepository.findByActiveTrue(PageRequest.of(page, size, sortDirection, *sortField))
+    ) : Page<AccountEntity> {
+        return accountService.findActive(page, size, sortDirection, sortField)
     }
 
-    @RequestMapping(
-        value = ["/inactive"],
-        method = [RequestMethod.GET]
-    )
-    fun getInactiveAccounts(
+    @GetMapping(value = ["/inactive"])
+    fun findInactive(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "20") size: Int,
         @RequestParam(defaultValue = "email") sortField: Array<String>,
         @RequestParam(defaultValue = "DESC") sortDirection: Sort.Direction
-    ) : Page<Account> {
-        return accountRepository.findByActiveFalse(PageRequest.of(page, size, sortDirection, *sortField))
+    ) : Page<AccountEntity> {
+        return accountService.findInactive(page, size, sortDirection, sortField)
     }
 
-    @RequestMapping(
-        value = ["/uuid/{uuid}"],
-        method = [RequestMethod.GET]
-    )
-    fun getAccountByUuid(
+    @GetMapping(value = ["/uuid/{uuid}"])
+    fun findByUuid(
         @PathVariable uuid : UUID
-    ) : ResponseEntity<Account> {
-        val account = accountRepository.findById(uuid)
-        if (account.isPresent)
+    ) : ResponseEntity<AccountEntity> {
+        val account = accountService.findByUuid(uuid)
+        if (account.isPresent) {
             return ResponseEntity(account.get(), HttpStatus.OK)
+        }
 
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
-    @RequestMapping(
-        value = ["/email/{email}"],
-        method = [RequestMethod.GET]
+    @PutMapping(
+        value = ["/uuid/{uuid}"],
+        consumes = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun getAccountByEmail(
+    fun update(
+        @PathVariable uuid : UUID,
+        @RequestBody accountDTO : AccountDTO
+    ) : AccountEntity {
+        return accountService.update(uuid, accountDTO)
+    }
+
+    @DeleteMapping(value = ["/uuid/{uuid}"])
+    fun deleteByUuid(
+        @PathVariable uuid : UUID
+    ) {
+        return accountService.deleteById(uuid)
+    }
+
+    @GetMapping(value = ["/email/{email}"])
+    fun findByEmail(
         @PathVariable email : String
-    ) : ResponseEntity<Account> {
-        val account = accountRepository.findByEmail(email)
+    ) : ResponseEntity<AccountEntity> {
+        val account = accountService.findByEmail(email)
         if (account.isPresent)
             return ResponseEntity(account.get(), HttpStatus.OK)
 

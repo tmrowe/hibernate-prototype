@@ -1,9 +1,7 @@
 package com.prototype.hibernate.repository
 
-import com.prototype.hibernate.model.Account
-import com.prototype.hibernate.model.AccountList
-import com.prototype.hibernate.model.AccountListPermission
-import junit.framework.Assert.assertEquals
+import com.prototype.hibernate.model.entity.*
+import org.junit.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -25,17 +23,17 @@ class TestAccountList {
     @Autowired
     lateinit var accountListRepository : AccountListRepository
 
-    private val account = Account(
+    private val account = AccountEntity(
         email = "some email address"
     )
 
-    private val list = com.prototype.hibernate.model.List(
+    private val list = ListEntity(
         createdBy = account,
         name = "some name",
         description = "some description"
     )
 
-    private val accountListPermission = AccountListPermission(
+    private val accountListPermission = AccountListPermissionEntity(
         canViewList = true,
         canEditList = true,
         canDeleteList = false
@@ -60,7 +58,7 @@ class TestAccountList {
 
     @Test
     fun `create and save AccountList object with default values set`() {
-        val accountList = AccountList(
+        val accountList = AccountListEntity(
             account = account,
             list = list,
             permission = accountListPermission

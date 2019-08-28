@@ -1,7 +1,8 @@
 package com.prototype.hibernate.repository
 
-import com.prototype.hibernate.model.Account
-import junit.framework.Assert.assertEquals
+import com.prototype.hibernate.model.entity.AccountEntity
+import com.prototype.hibernate.model.entity.ListEntity
+import org.junit.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -20,12 +21,12 @@ class TestList {
     @Autowired
     lateinit var accountRepository : AccountRepository
 
-    private val account = Account(
+    private val account = AccountEntity(
         email = "test123@test.com"
     )
 
     private val name = "some name"
-    private val list = com.prototype.hibernate.model.List(
+    private val list = ListEntity(
         createdBy = account,
         name = name,
         description = "some description"
