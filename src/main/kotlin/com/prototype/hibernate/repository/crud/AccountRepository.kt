@@ -1,4 +1,4 @@
-package com.prototype.hibernate.repository
+package com.prototype.hibernate.repository.crud
 
 import org.springframework.data.domain.Page
 import com.prototype.hibernate.model.entity.AccountEntity

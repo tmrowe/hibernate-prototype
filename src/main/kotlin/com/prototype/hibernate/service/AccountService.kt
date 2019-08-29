@@ -3,11 +3,12 @@ package com.prototype.hibernate.service
 import com.prototype.hibernate.model.dto.AccountDTO
 import com.prototype.hibernate.model.entity.AccountEntity
 import com.prototype.hibernate.model.mapper.toEntity
-import com.prototype.hibernate.repository.AccountRepository
+import com.prototype.hibernate.repository.crud.AccountRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Service
@@ -58,15 +59,17 @@ class AccountService(
         return accountRepository.findByEmail(email)
     }
 
+    @Transactional
     override fun update(uuid : UUID, accountDTO : AccountDTO): AccountEntity {
-        val account = accountRepository.getOne(uuid).copy(
+        val account = accountRepository.findById(uuid).get()
+        val updatedAccount = account.copy(
             active = accountDTO.active,
             email = accountDTO.email
         )
-        return accountRepository.save(account)
+        return accountRepository.save(updatedAccount)
     }
 
-    override fun deleteById(uuid : UUID) {
+    override fun deleteByUuid(uuid : UUID) {
         return accountRepository.deleteById(uuid)
     }
 

@@ -39,6 +39,6 @@ interface IAccountService {
 
     fun update(uuid : UUID, accountDTO : AccountDTO): AccountEntity
 
-    fun deleteById(uuid : UUID)
+    fun deleteByUuid(uuid : UUID)
 
 }

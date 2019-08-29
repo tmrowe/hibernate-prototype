@@ -1,4 +1,4 @@
-package com.prototype.hibernate.repository
+package com.prototype.hibernate.repository.crud
 
 import com.prototype.hibernate.model.entity.AccountListEntity
 import org.springframework.data.jpa.repository.JpaRepository

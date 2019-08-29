@@ -20,7 +20,7 @@ class JPAConfiguration {
         @Value("\${spring.jpa.hibernate.naming.physical-strategy}") physicalNamingStrategy : String,
         @Value("\${spring.jpa.hibernate.naming.implicit-strategy}") implicitNamingStrategy : String
     ): LocalContainerEntityManagerFactoryBean {
-        val modelPackage = "com.prototype.hibernate.model"
+        val modelPackage = "com.prototype.hibernate.model.entity"
         val properties = mapOf<String, Any>(
             "hibernate.physical_naming_strategy" to physicalNamingStrategy,
             "hibernate.implicit_naming_strategy" to implicitNamingStrategy

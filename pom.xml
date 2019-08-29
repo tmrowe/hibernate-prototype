@@ -19,6 +19,7 @@
         <main.class>com.prototype.hibernate.Application</main.class>
         <maven.compiler.source>12</maven.compiler.source>
         <maven.compiler.target>12</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Database -->
         <flyway.url>jdbc:postgresql://localhost:5432/flyway</flyway.url>

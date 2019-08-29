@@ -1,6 +1,7 @@
-package com.prototype.hibernate.repository
+package com.prototype.hibernate.repository.crud
 
-import com.prototype.hibernate.model.entity.*
+import com.prototype.hibernate.model.entity.AccountEntity
+import com.prototype.hibernate.model.entity.ListEntity
 import org.junit.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
@@ -12,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner::class)
-class TestAccountList {
+class TestList {
 
     @Autowired
     lateinit var listRepository : ListRepository
@@ -20,50 +21,34 @@ class TestAccountList {
     @Autowired
     lateinit var accountRepository : AccountRepository
 
-    @Autowired
-    lateinit var accountListRepository : AccountListRepository
-
     private val account = AccountEntity(
-        email = "some email address"
+        email = "test123@test.com"
     )
 
+    private val name = "some name"
     private val list = ListEntity(
         createdBy = account,
-        name = "some name",
+        name = name,
         description = "some description"
-    )
-
-    private val accountListPermission = AccountListPermissionEntity(
-        canViewList = true,
-        canEditList = true,
-        canDeleteList = false
     )
 
     @Before
     fun setup() {
-        accountListRepository.deleteAllInBatch()
         listRepository.deleteAllInBatch()
         accountRepository.deleteAllInBatch()
 
         accountRepository.save(account)
-        listRepository.save(list)
     }
 
     @After
     fun teardown() {
-        accountListRepository.deleteAllInBatch()
         listRepository.deleteAllInBatch()
         accountRepository.deleteAllInBatch()
     }
 
     @Test
-    fun `create and save AccountList object with default values set`() {
-        val accountList = AccountListEntity(
-            account = account,
-            list = list,
-            permission = accountListPermission
-        )
-        accountListRepository.save(accountList)
+    fun `create and save List object with default values set`() {
+        listRepository.save(list)
         assertEquals(1, accountRepository.count())
     }
 

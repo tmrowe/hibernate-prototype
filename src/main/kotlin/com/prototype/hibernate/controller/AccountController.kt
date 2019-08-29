@@ -84,7 +84,7 @@ class AccountController(
     fun deleteByUuid(
         @PathVariable uuid : UUID
     ) {
-        return accountService.deleteById(uuid)
+        return accountService.deleteByUuid(uuid)
     }
 
     @GetMapping(value = ["/email/{email}"])
