@@ -17,10 +17,10 @@ interface IAccountListService {
         sortField: Array<String>
     ) : Page<AccountListEntity>
 
-    fun findByUuid(uuid : UUID) : Optional<AccountListEntity>
+    fun findByUuid(accountUuid : UUID, listUuid : UUID) : Optional<AccountListEntity>
 
-    fun update(uuid : UUID, accountListDTO: AccountListDTO): AccountListEntity
+    fun update(accountUuid : UUID, listUuid : UUID, accountListDTO: AccountListDTO): AccountListEntity
 
-    fun deleteByUuid(uuid : UUID)
+    fun deleteByUuid(accountUuid : UUID, listUuid : UUID)
 
 }

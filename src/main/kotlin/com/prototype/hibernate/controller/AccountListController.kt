@@ -39,11 +39,12 @@ class AccountListController(
         return accountListService.findAll(page, size, sortDirection, sortField)
     }
 
-    @GetMapping(value = ["/uuid/{uuid}"])
+    @GetMapping(value = ["/account_uuid/{accountUuid}/list_uuid/{listUuid}"])
     fun findByUuid(
-        @PathVariable uuid : UUID
+        @PathVariable accountUuid: UUID,
+        @PathVariable listUuid: UUID
     ) : ResponseEntity<AccountListEntity> {
-        val account = accountListService.findByUuid(uuid)
+        val account = accountListService.findByUuid(accountUuid, listUuid)
         if (account.isPresent) {
             return ResponseEntity(account.get(), HttpStatus.OK)
         }
@@ -52,21 +53,23 @@ class AccountListController(
     }
 
     @PutMapping(
-        value = ["/uuid/{uuid}"],
+        value = ["/account_uuid/{accountUuid}/list_uuid/{listUuid}"],
         consumes = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun update(
-        @PathVariable uuid : UUID,
+        @PathVariable accountUuid: UUID,
+        @PathVariable listUuid: UUID,
         @RequestBody accountListDTO : AccountListDTO
     ) : AccountListEntity {
-        return accountListService.update(uuid, accountListDTO)
+        return accountListService.update(accountUuid, listUuid, accountListDTO)
     }
 
-    @DeleteMapping(value = ["/uuid/{uuid}"])
+    @DeleteMapping(value = ["/account_uuid/{accountUuid}/list_uuid/{listUuid}"])
     fun deleteByUuid(
-        @PathVariable uuid : UUID
+        @PathVariable accountUuid: UUID,
+        @PathVariable listUuid: UUID
     ) {
-        return accountListService.deleteByUuid(uuid)
+        return accountListService.deleteByUuid(accountUuid, listUuid)
     }
 
 }

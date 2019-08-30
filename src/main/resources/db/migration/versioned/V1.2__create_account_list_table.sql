@@ -8,10 +8,11 @@ CREATE TABLE account_list_permission (
 );
 
 CREATE TABLE account_list (
-    uuid UUID NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
     account_uuid UUID NOT NULL REFERENCES account(uuid),
     list_uuid UUID NOT NULL REFERENCES list(uuid),
     permission_uuid UUID NOT NULL REFERENCES account_list_permission(uuid),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+
+    PRIMARY KEY(account_uuid, list_uuid)
 );

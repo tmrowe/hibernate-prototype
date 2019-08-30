@@ -27,7 +27,6 @@ class ListService(
         return createdList
     }
 
-    // TODO: Perhaps this function can be nested in create.
     private fun grantListOwnerPermission(userUuid : UUID, listUuid: UUID) {
         accountListService.create(userUuid, listUuid, AccountListDTO(
             permission = AccountListPermissionDTO(

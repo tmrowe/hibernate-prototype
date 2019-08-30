@@ -3,34 +3,29 @@ package com.prototype.hibernate.model.entity
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
-import java.util.*
 import javax.persistence.*
 
 @Entity
 @Table(name = "account_list")
 data class AccountListEntity (
 
-    // TODO: Might be better to replace this with a composite ID.
-    @Id
-    @GeneratedValue
-    @Column(
-        unique = true,
-        nullable = false
-    )
-    val uuid : UUID? = null,
+    @EmbeddedId
+    val uuid : AccountListEntityId? = null,
 
     @ManyToOne
-    val account : AccountEntity,
+    @MapsId(value = "account_uuid")
+    val account : AccountEntity? = null,
 
     @ManyToOne
-    val list : ListEntity,
+    @MapsId(value = "list_uuid")
+    val list : ListEntity? = null,
 
     @OneToOne(
         optional = false,
         cascade = [CascadeType.ALL]
     )
     @JoinColumn
-    val permission : AccountListPermissionEntity = AccountListPermissionEntity(),
+    val permission : AccountListPermissionEntity,
 
     @CreationTimestamp
     val createdAt : LocalDateTime? = null,
