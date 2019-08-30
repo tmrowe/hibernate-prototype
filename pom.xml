@@ -39,6 +39,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <kotlin.version>1.3.50</kotlin.version>
         <junit.version>4.12</junit.version>
+        <mockito.version>2.27.0</mockito.version>
 
         <!-- Plugins -->
         <flyway-plugin.version>4.0.3</flyway-plugin.version>
@@ -138,6 +139,13 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
 

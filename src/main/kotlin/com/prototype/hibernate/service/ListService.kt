@@ -1,7 +1,6 @@
 package com.prototype.hibernate.service
 
 import com.prototype.hibernate.model.dto.AccountListDTO
-import com.prototype.hibernate.model.dto.AccountListPermissionDTO
 import com.prototype.hibernate.model.dto.ListDTO
 import com.prototype.hibernate.model.entity.ListEntity
 import com.prototype.hibernate.model.entity.embeddable.AccountListPermission
