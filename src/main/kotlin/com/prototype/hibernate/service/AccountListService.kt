@@ -2,8 +2,8 @@ package com.prototype.hibernate.service
 
 import com.prototype.hibernate.model.dto.AccountListDTO
 import com.prototype.hibernate.model.entity.AccountListEntity
-import com.prototype.hibernate.model.entity.AccountListEntityId
-import com.prototype.hibernate.model.entity.AccountListPermissionEntity
+import com.prototype.hibernate.model.entity.embeddable.AccountListId
+import com.prototype.hibernate.model.entity.embeddable.AccountListPermission
 import com.prototype.hibernate.repository.crud.AccountListRepository
 import com.prototype.hibernate.repository.crud.AccountRepository
 import com.prototype.hibernate.repository.crud.ListRepository
@@ -49,11 +49,7 @@ class AccountListService(
         val accountListUuid = buildUuid(accountUuid, listUuid)
         val accountList = accountListRepository.findById(accountListUuid).get()
         val updatedAccountList = accountList.copy(
-            permission = AccountListPermissionEntity(
-                canViewList = accountListDTO.permission.canViewList,
-                canEditList = accountListDTO.permission.canEditList,
-                canDeleteList = accountListDTO.permission.canDeleteList
-            )
+            permission = accountListDTO.permission
         )
         return accountListRepository.save(updatedAccountList)
     }
@@ -63,8 +59,8 @@ class AccountListService(
         return accountListRepository.deleteById(uuid)
     }
 
-    private fun buildUuid(accountUuid : UUID, listUuid : UUID) : AccountListEntityId {
-        return AccountListEntityId(
+    private fun buildUuid(accountUuid : UUID, listUuid : UUID) : AccountListId {
+        return AccountListId(
             accountUuid,
             listUuid
         )

@@ -1,20 +1,18 @@
 package com.prototype.hibernate.model.dto
 
 import com.prototype.hibernate.model.entity.*
+import com.prototype.hibernate.model.entity.embeddable.AccountListId
+import com.prototype.hibernate.model.entity.embeddable.AccountListPermission
 
 data class AccountListDTO(
-    val permission : AccountListPermissionDTO
+    val permission : AccountListPermission
 ) {
 
-    fun toEntity(accountUuid: AccountListEntityId, account: AccountEntity, list: ListEntity) = AccountListEntity(
+    fun toEntity(accountUuid: AccountListId, account: AccountEntity, list: ListEntity) = AccountListEntity(
         uuid = accountUuid,
         account = account,
         list = list,
-        permission = AccountListPermissionEntity(
-            canViewList = permission.canViewList,
-            canEditList = permission.canEditList,
-            canDeleteList = permission.canDeleteList
-        )
+        permission = permission
     )
 
 }

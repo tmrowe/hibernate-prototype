@@ -27,9 +27,11 @@ data class AccountEntity (
     @Column(nullable = false)
     val active : Boolean = false,
 
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     val createdAt : LocalDateTime? = null,
 
+    @Column(nullable = false)
     @UpdateTimestamp
     val updatedAt : LocalDateTime? = null
 

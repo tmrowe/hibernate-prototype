@@ -4,6 +4,7 @@ import com.prototype.hibernate.model.dto.AccountListDTO
 import com.prototype.hibernate.model.dto.AccountListPermissionDTO
 import com.prototype.hibernate.model.dto.ListDTO
 import com.prototype.hibernate.model.entity.ListEntity
+import com.prototype.hibernate.model.entity.embeddable.AccountListPermission
 import com.prototype.hibernate.repository.crud.AccountRepository
 import com.prototype.hibernate.repository.crud.ListRepository
 import org.springframework.data.domain.Page
@@ -29,7 +30,7 @@ class ListService(
 
     private fun grantListOwnerPermission(userUuid : UUID, listUuid: UUID) {
         accountListService.create(userUuid, listUuid, AccountListDTO(
-            permission = AccountListPermissionDTO(
+            permission = AccountListPermission(
                 canViewList = true,
                 canEditList = true,
                 canDeleteList = true

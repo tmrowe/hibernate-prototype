@@ -1,6 +1,8 @@
 package com.prototype.hibernate.repository.crud
 
 import com.prototype.hibernate.model.entity.*
+import com.prototype.hibernate.model.entity.embeddable.AccountListId
+import com.prototype.hibernate.model.entity.embeddable.AccountListPermission
 import org.junit.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
@@ -33,7 +35,7 @@ class TestAccountList {
         description = "some description"
     )
 
-    private val accountListPermission = AccountListPermissionEntity(
+    private val accountListPermission = AccountListPermission(
         canViewList = true,
         canEditList = true,
         canDeleteList = false
@@ -59,6 +61,10 @@ class TestAccountList {
     @Test
     fun `create and save AccountList object with default values set`() {
         val accountList = AccountListEntity(
+            uuid = AccountListId(
+                account_uuid = account.uuid!!,
+                list_uuid = list.uuid!!
+            ),
             account = account,
             list = list,
             permission = accountListPermission

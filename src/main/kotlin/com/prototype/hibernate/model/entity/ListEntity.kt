@@ -29,9 +29,11 @@ data class ListEntity (
     val name : String,
     val description : String?,
 
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     val createdAt : LocalDateTime? = null,
 
+    @Column(nullable = false)
     @UpdateTimestamp
     val updatedAt : LocalDateTime? = null
 
