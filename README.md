@@ -92,8 +92,8 @@ Documentation:
 - Working with DTOs
 - Puts (replacing the whole entity) used by default. Patches (updating part of the entity) used where required.
 - Class naming conventions.
-    All Entity classes should be the table name in cable case suffixed with Entity. Due to this we will need to specify
-    the table the Entity class maps to in the database using the @Table annotation.
+    All Entity classes should be the table name in camel case suffixed with Entity. 
+    Our naming strategy removes this suffix so there is no need to specify the table name in the entities. 
     All DTO classes should be suffixed with DTO.
 
 - Entities

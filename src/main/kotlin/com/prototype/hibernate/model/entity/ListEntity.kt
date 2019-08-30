@@ -7,7 +7,6 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "list")
 data class ListEntity (
 
     @Id

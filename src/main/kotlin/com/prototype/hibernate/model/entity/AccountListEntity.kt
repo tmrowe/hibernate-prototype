@@ -8,7 +8,6 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-@Table(name = "account_list")
 data class AccountListEntity (
 
     @EmbeddedId

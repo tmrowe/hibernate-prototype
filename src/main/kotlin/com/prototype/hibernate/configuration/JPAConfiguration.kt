@@ -8,17 +8,19 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import javax.sql.DataSource
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder
+import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
 
 @Configuration
 @EnableTransactionManagement
 class JPAConfiguration {
 
+    private val physicalNamingStrategy = PhysicalNamingStrategy::class.java.canonicalName
+    private val implicitNamingStrategy = SpringImplicitNamingStrategy::class.java.canonicalName
+
     @Bean
     fun entityManagerFactory(
         builder: EntityManagerFactoryBuilder,
-        dataSource: DataSource,
-        @Value("\${spring.jpa.hibernate.naming.physical-strategy}") physicalNamingStrategy : String,
-        @Value("\${spring.jpa.hibernate.naming.implicit-strategy}") implicitNamingStrategy : String
+        dataSource: DataSource
     ): LocalContainerEntityManagerFactoryBean {
         val modelPackage = "com.prototype.hibernate.model.entity"
         val properties = mapOf<String, Any>(
