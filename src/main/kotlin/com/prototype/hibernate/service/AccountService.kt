@@ -2,7 +2,6 @@ package com.prototype.hibernate.service
 
 import com.prototype.hibernate.model.dto.AccountDTO
 import com.prototype.hibernate.model.entity.AccountEntity
-import com.prototype.hibernate.model.mapper.toEntity
 import com.prototype.hibernate.repository.crud.AccountRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest

@@ -10,6 +10,7 @@ import javax.persistence.*
 @Table(name = "account_list")
 data class AccountListEntity (
 
+    // TODO: Might be better to replace this with a composite ID.
     @Id
     @GeneratedValue
     @Column(

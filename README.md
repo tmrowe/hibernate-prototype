@@ -58,8 +58,8 @@ __TODO__
 
 Code:
 - Take specific required dependencies from Spring Boot Starters?
-- Auto generate simple CRUD endpoints?
-- Add controllers for List and Accountlist repositories. 
+- Add controllers for List and AccountList repositories. 
+- Have services call other services rather than repositories.
 
 Testing:
 - Define test cases to check object equality.
