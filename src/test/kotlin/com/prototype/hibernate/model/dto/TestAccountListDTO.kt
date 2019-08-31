@@ -7,15 +7,15 @@ import com.prototype.hibernate.model.entity.embeddable.AccountListPermission
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.mock
+import com.nhaarman.mockito_kotlin.*
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
 @RunWith(SpringJUnit4ClassRunner::class)
 class TestAccountListDTO {
 
-    private val mockAccountListId = mock(AccountListId::class.java)
-    private val mockAccountEntity = mock(AccountEntity::class.java)
-    private val mockListEntity = mock(ListEntity::class.java)
+    private val mockAccountListId = mock<AccountListId>()
+    private val mockAccountEntity = mock<AccountEntity>()
+    private val mockListEntity = mock<ListEntity>()
 
     private val accountListDTO = AccountListDTO(
         permission = AccountListPermission(

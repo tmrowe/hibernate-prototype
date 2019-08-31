@@ -3,12 +3,11 @@ package com.prototype.hibernate.service
 import com.prototype.hibernate.model.dto.AccountListDTO
 import com.prototype.hibernate.model.entity.AccountListEntity
 import com.prototype.hibernate.model.entity.embeddable.AccountListId
-import com.prototype.hibernate.model.entity.embeddable.AccountListPermission
 import com.prototype.hibernate.repository.crud.AccountListRepository
 import com.prototype.hibernate.repository.crud.AccountRepository
 import com.prototype.hibernate.repository.crud.ListRepository
+import com.prototype.hibernate.service.utility.PageRequestFactory
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -18,7 +17,8 @@ import java.util.*
 class AccountListService(
     private val accountListRepository : AccountListRepository,
     private val accountRepository: AccountRepository,
-    private val listRepository : ListRepository
+    private val listRepository : ListRepository,
+    private val pageRequestFactory : PageRequestFactory
 ) : IAccountListService {
 
     @Transactional
@@ -36,7 +36,7 @@ class AccountListService(
         sortDirection : Sort.Direction,
         sortField : Array<String>
     ): Page<AccountListEntity> {
-        val pageRequest = PageRequest.of(page, size, sortDirection, *sortField)
+        val pageRequest = pageRequestFactory.build(page, size, sortDirection, sortField)
         return accountListRepository.findAll(pageRequest)
     }
 
@@ -55,8 +55,8 @@ class AccountListService(
     }
 
     override fun deleteByUuid(accountUuid : UUID, listUuid : UUID) {
-        val uuid = buildUuid(accountUuid, listUuid)
-        return accountListRepository.deleteById(uuid)
+        val accountListUuid = buildUuid(accountUuid, listUuid)
+        return accountListRepository.deleteById(accountListUuid)
     }
 
     private fun buildUuid(accountUuid : UUID, listUuid : UUID) : AccountListId {

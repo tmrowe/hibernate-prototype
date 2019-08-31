@@ -6,8 +6,8 @@ import com.prototype.hibernate.model.entity.ListEntity
 import com.prototype.hibernate.model.entity.embeddable.AccountListPermission
 import com.prototype.hibernate.repository.crud.AccountRepository
 import com.prototype.hibernate.repository.crud.ListRepository
+import com.prototype.hibernate.service.utility.PageRequestFactory
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -17,11 +17,12 @@ import java.util.*
 class ListService(
     private val listRepository : ListRepository,
     private val accountRepository : AccountRepository,
-    private val accountListService : AccountListService
+    private val accountListService : AccountListService,
+    private val pageRequestFactory : PageRequestFactory
 ) : IListService {
 
     override fun create(createdByUuid : UUID, listDTO : ListDTO) : ListEntity {
-        val listOwner = accountRepository.getOne(createdByUuid)
+        val listOwner = accountRepository.findById(createdByUuid).get()
         val createdList = listRepository.save(listDTO.toEntity(listOwner))
         grantListOwnerPermission(createdByUuid, createdList.uuid!!)
         return createdList
@@ -43,7 +44,7 @@ class ListService(
         sortDirection : Sort.Direction,
         sortField : Array<String>
     ): Page<ListEntity> {
-        val pageRequest = PageRequest.of(page, size, sortDirection, *sortField)
+        val pageRequest = pageRequestFactory.build(page, size, sortDirection, sortField)
         return listRepository.findAll(pageRequest)
     }
 

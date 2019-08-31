@@ -4,13 +4,13 @@ import com.prototype.hibernate.model.entity.AccountEntity
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito
+import com.nhaarman.mockito_kotlin.*
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
 @RunWith(SpringJUnit4ClassRunner::class)
 class TestListDTO {
 
-    private val mockAccountEntity = Mockito.mock(AccountEntity::class.java)
+    private val mockAccountEntity = mock<AccountEntity>()
 
     @Test
     fun `ListDTO#toEntity should copy all of its properties into an instance of ListEntity`() {

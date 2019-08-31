@@ -95,6 +95,8 @@ Documentation:
     All Entity classes should be the table name in camel case suffixed with Entity. 
     Our naming strategy removes this suffix so there is no need to specify the table name in the entities. 
     All DTO classes should be suffixed with DTO.
+- Testing:
+    Using Mockito extension: https://github.com/nhaarman/mockito-kotlin/wiki/Mocking-and-verifying
 
 - Entities
     Requirements:
