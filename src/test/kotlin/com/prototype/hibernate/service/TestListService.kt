@@ -7,39 +7,37 @@ import org.junit.Assert.*
 import com.nhaarman.mockito_kotlin.*
 import com.prototype.hibernate.model.dto.AccountListDTO
 import com.prototype.hibernate.model.dto.ListDTO
-import com.prototype.hibernate.model.entity.AccountEntity
-import com.prototype.hibernate.model.entity.ListEntity
 import com.prototype.hibernate.model.entity.embeddable.AccountListPermission
-import com.prototype.hibernate.repository.crud.AccountRepository
-import com.prototype.hibernate.repository.crud.ListRepository
-import com.prototype.hibernate.service.utility.PageRequestFactory
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
+import com.prototype.hibernate.mock.repository.crud.MockBuilderAccountRepository
+import com.prototype.hibernate.mock.repository.crud.MockBuilderListRepository
+import com.prototype.hibernate.mock.service.utility.MockBuilderPageRequestFactory
 import org.springframework.data.domain.Sort
-import java.util.*
 
 @RunWith(SpringJUnit4ClassRunner::class)
 class TestListService {
 
     private val listService : ListService
 
-    private val mockListRepository = mock<ListRepository>()
-    private val mockAccountRepository = mock<AccountRepository>()
+    private val mockBuilderListRepository = MockBuilderListRepository()
+    private val mockBuilderAccountRepository = MockBuilderAccountRepository()
+    private val mockBuilderPageRequestFactory = MockBuilderPageRequestFactory()
+
+    private val mockListRepository = mockBuilderListRepository.repository
+    private val mockAccountRepository = mockBuilderAccountRepository.repository
     private val mockAccountListService = mock<AccountListService>()
-    private val mockPageRequestFactory = mock<PageRequestFactory>()
+    private val mockPageRequestFactory = mockBuilderPageRequestFactory.pageRequestFactory
 
-    private val mockListEntity = mock<ListEntity>()
-    private val mockOptionalListEntity = mock<Optional<ListEntity>>()
+    private val mockListEntity = mockBuilderListRepository.entity
+    private val mockPageEntity = mockBuilderListRepository.pageEntity
+    private val mockOptionalEntity = mockBuilderListRepository.optionalEntity
+    private val mockListUuid = mockBuilderListRepository.uuid
+
+    private val mockAccountEntity = mockBuilderAccountRepository.entity
+    private val mockAccountUuid = mockBuilderAccountRepository.uuid
+
+    private val mockPageRequest = mockBuilderPageRequestFactory.pageRequest
+
     private val mockListDTO = mock<ListDTO>()
-
-    private val mockAccountEntity = mock<AccountEntity>()
-    private val mockOptionalAccountEntity = mock<Optional<AccountEntity>>()
-
-    private val mockAccountUuid = mock<UUID>()
-    private val mockListUuid = mock<UUID>()
-
-    private val mockPageRequest = mock<PageRequest>()
-    private val mockPage = mock<Page<ListEntity>>()
 
     private val page = 0
     private val size = 20
@@ -53,33 +51,12 @@ class TestListService {
             mockAccountListService,
             mockPageRequestFactory
         )
-
-        whenever(mockAccountRepository.findById(any()))
-            .thenReturn(mockOptionalAccountEntity)
-
-        whenever(mockOptionalAccountEntity.get())
-            .thenReturn(mockAccountEntity)
-
-        whenever(mockListRepository.findById(any()))
-            .thenReturn(mockOptionalListEntity)
-
-        whenever(mockOptionalListEntity.get())
-            .thenReturn(mockListEntity)
-
-        whenever(mockPageRequestFactory.build(any(), any(), any(), any()))
-            .thenReturn(mockPageRequest)
     }
 
     @Test
     fun `ListService#create should instantiate an instance of ListEntity and pass it to the repository`() {
-        whenever(mockListRepository.save(any<ListEntity>()))
-            .thenReturn(mockListEntity)
-
         whenever(mockListDTO.toEntity(any()))
             .thenReturn(mockListEntity)
-
-        whenever(mockListEntity.uuid)
-            .thenReturn(mockListUuid)
 
         val result = listService.create(mockAccountUuid, mockListDTO)
 
@@ -97,35 +74,23 @@ class TestListService {
 
     @Test
     fun `ListService#findAll should call ListRepository#findAll`() {
-        whenever(mockListRepository.findAll(any<PageRequest>()))
-            .thenReturn(mockPage)
-
         val result = listService.findAll(page, size, sortDirection, sortField)
 
         verify(mockPageRequestFactory).build(page, size, sortDirection, sortField)
         verify(mockListRepository).findAll(mockPageRequest)
-        assertEquals(mockPage, result)
+        assertEquals(mockPageEntity, result)
     }
 
     @Test
     fun `ListService#findByUuid should call ListRepository#findById`() {
-        whenever(mockListRepository.findById(any()))
-            .thenReturn(mockOptionalListEntity)
-
         val result = listService.findByUuid(mockListUuid)
 
         verify(mockListRepository).findById(mockListUuid)
-        assertEquals(mockOptionalListEntity, result)
+        assertEquals(mockOptionalEntity, result)
     }
 
     @Test
     fun `ListService#update should call ListRepository#save`() {
-        whenever(mockListRepository.save(any<ListEntity>()))
-            .thenReturn(mockListEntity)
-
-        whenever(mockListEntity.copy())
-            .thenReturn(mockListEntity)
-
         val result = listService.update(mockListUuid, mockListDTO)
 
         verify(mockListEntity).copy(
