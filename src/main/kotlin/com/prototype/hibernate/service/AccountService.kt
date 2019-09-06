@@ -38,7 +38,7 @@ class AccountService(
         sortField: Array<String>
     ) : Page<AccountEntity> {
         val pageRequest = pageRequestFactory.build(page, size, sortDirection, sortField)
-        return accountRepository.findByActiveTrue(pageRequest)
+        return accountRepository.findByActiveTrue(pageRequest, AccountEntity::class.java)
     }
 
     override fun findInactive(
@@ -48,7 +48,7 @@ class AccountService(
         sortField: Array<String>
     ) : Page<AccountEntity> {
         val pageRequest = pageRequestFactory.build(page, size, sortDirection, sortField)
-        return accountRepository.findByActiveFalse(pageRequest)
+        return accountRepository.findByActiveFalse(pageRequest, AccountEntity::class.java)
     }
 
     override fun findByUuid(uuid : UUID) : Optional<AccountEntity> {
@@ -56,7 +56,7 @@ class AccountService(
     }
 
     override fun findByEmail(email : String) : Optional<AccountEntity> {
-        return accountRepository.findByEmail(email)
+        return accountRepository.findByEmail(email, AccountEntity::class.java)
     }
 
     @Transactional

@@ -4,10 +4,13 @@ import com.nhaarman.mockito_kotlin.*
 import com.prototype.hibernate.mock.repository.crud.MockBuilderAccountRepository
 import com.prototype.hibernate.mock.service.utility.MockBuilderPageRequestFactory
 import com.prototype.hibernate.model.dto.AccountDTO
+import com.prototype.hibernate.model.entity.AccountEntity
+import com.prototype.hibernate.model.view.EmailView
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.junit.Assert.*
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.Sort
 
 @RunWith(SpringJUnit4ClassRunner::class)
@@ -66,7 +69,7 @@ class TestAccountService {
         val result = accountService.findActive(page, size, sortDirection, sortField)
 
         verify(mockPageRequestFactory).build(page, size, sortDirection, sortField)
-        verify(mockAccountRepository).findByActiveTrue(mockPageRequest)
+        verify(mockAccountRepository).findByActiveTrue(mockPageRequest, AccountEntity::class.java)
         assertEquals(mockPage, result)
     }
 
@@ -75,7 +78,7 @@ class TestAccountService {
         val result = accountService.findInactive(page, size, sortDirection, sortField)
 
         verify(mockPageRequestFactory).build(page, size, sortDirection, sortField)
-        verify(mockAccountRepository).findByActiveFalse(mockPageRequest)
+        verify(mockAccountRepository).findByActiveFalse(mockPageRequest, AccountEntity::class.java)
         assertEquals(mockPage, result)
     }
 
@@ -91,7 +94,7 @@ class TestAccountService {
     fun `AccountService#findByEmail should call AccountRepository#findByEmail`() {
         val result = accountService.findByEmail(email)
 
-        verify(mockAccountRepository).findByEmail(email)
+        verify(mockAccountRepository).findByEmail(email, AccountEntity::class.java)
         assertEquals(mockOptionalAccountEntity, result)
     }
 

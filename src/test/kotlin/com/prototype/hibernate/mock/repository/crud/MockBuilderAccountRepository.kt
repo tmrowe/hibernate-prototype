@@ -15,13 +15,13 @@ class MockBuilderAccountRepository : MockBuilderRepository<AccountRepository, Ac
 
     init {
 
-        whenever(repository.findByActiveFalse(any()))
+        whenever(repository.findByActiveFalse(any(), any<Class<AccountEntity>>()))
             .thenReturn(pageEntity)
 
-        whenever(repository.findByActiveTrue(any()))
+        whenever(repository.findByActiveTrue(any(), any<Class<AccountEntity>>()))
             .thenReturn(pageEntity)
 
-        whenever(repository.findByEmail(any()))
+        whenever(repository.findByEmail(any(), any<Class<AccountEntity>>()))
             .thenReturn(optionalEntity)
 
         whenever(entity.uuid)

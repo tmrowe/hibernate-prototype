@@ -130,3 +130,12 @@ Documentation:
         proxies for lazy-loading the entity.
         - Hibernate does not restrict the application developer from exposing instance variables and reference them from
         outside the entity class itself. The validity of such a paradigm, however, is debatable at best.
+        
+Spring Data:
+    Projections: 
+        https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#projections
+        http://www.bytestree.com/spring/spring-data-jpa-projections-5-ways-return-custom-object
+    
+    Repository function naming: 
+        https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+       
