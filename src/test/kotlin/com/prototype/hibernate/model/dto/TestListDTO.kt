@@ -1,6 +1,6 @@
 package com.prototype.hibernate.model.dto
 
-import com.prototype.hibernate.model.entity.AccountEntity
+import com.prototype.hibernate.model.entity.Account
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 @RunWith(SpringJUnit4ClassRunner::class)
 class TestListDTO {
 
-    private val mockAccountEntity = mock<AccountEntity>()
+    private val mockAccountEntity = mock<Account>()
 
     @Test
     fun `ListDTO#toEntity should copy all of its properties into an instance of ListEntity`() {

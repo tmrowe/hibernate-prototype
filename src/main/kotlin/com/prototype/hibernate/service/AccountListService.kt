@@ -1,7 +1,7 @@
 package com.prototype.hibernate.service
 
 import com.prototype.hibernate.model.dto.AccountListDTO
-import com.prototype.hibernate.model.entity.AccountListEntity
+import com.prototype.hibernate.model.entity.AccountList
 import com.prototype.hibernate.model.entity.embeddable.AccountListId
 import com.prototype.hibernate.repository.crud.AccountListRepository
 import com.prototype.hibernate.repository.crud.AccountRepository
@@ -22,7 +22,7 @@ class AccountListService(
 ) : IAccountListService {
 
     @Transactional
-    override fun create(accountUuid : UUID, listUuid : UUID, accountListDTO : AccountListDTO) : AccountListEntity {
+    override fun create(accountUuid : UUID, listUuid : UUID, accountListDTO : AccountListDTO) : AccountList {
         val accountListUuid = buildUuid(accountUuid, listUuid)
         val account = accountRepository.findById(accountUuid).get()
         val list = listRepository.findById(listUuid).get()
@@ -35,17 +35,17 @@ class AccountListService(
         size : Int,
         sortDirection : Sort.Direction,
         sortField : Array<String>
-    ): Page<AccountListEntity> {
+    ): Page<AccountList> {
         val pageRequest = pageRequestFactory.build(page, size, sortDirection, sortField)
         return accountListRepository.findAll(pageRequest)
     }
 
-    override fun findByUuid(accountUuid : UUID, listUuid : UUID) : Optional<AccountListEntity> {
+    override fun findByUuid(accountUuid : UUID, listUuid : UUID) : Optional<AccountList> {
         val accountListUuid = buildUuid(accountUuid, listUuid)
         return accountListRepository.findById(accountListUuid)
     }
 
-    override fun update(accountUuid : UUID, listUuid : UUID, accountListDTO: AccountListDTO): AccountListEntity {
+    override fun update(accountUuid : UUID, listUuid : UUID, accountListDTO: AccountListDTO): AccountList {
         val accountListUuid = buildUuid(accountUuid, listUuid)
         val accountList = accountListRepository.findById(accountListUuid).get()
         val updatedAccountList = accountList.copy(

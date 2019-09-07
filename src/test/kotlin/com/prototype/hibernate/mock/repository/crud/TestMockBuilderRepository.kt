@@ -2,7 +2,7 @@ package com.prototype.hibernate.mock.repository.crud
 
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
-import com.prototype.hibernate.model.entity.ListEntity
+import com.prototype.hibernate.model.entity.List
 import com.prototype.hibernate.repository.crud.ListRepository
 import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.Assert.assertEquals
@@ -20,17 +20,17 @@ import java.util.*
 @RunWith(SpringJUnit4ClassRunner::class)
 class TestMockBuilderRepository {
 
-    private val mockBuilderRepository = MockBuilderRepository<ListRepository, ListEntity, UUID>(mock(), mock(), mock())
+    private val mockBuilderRepository = MockBuilderRepository<ListRepository, List, UUID>(mock(), mock(), mock())
 
     private val mockRepository = mockBuilderRepository.repository
 
     private val mockUuid = mock<UUID>()
-    private val mockEntity = mock<ListEntity>()
+    private val mockEntity = mock<List>()
     private val mockSort = mock<Sort>()
-    private val mockExample = mock<Example<ListEntity>>()
+    private val mockExample = mock<Example<List>>()
     private val mockPageRequest = mock<PageRequest>()
-    private val mockUuidIterable = mock<List<UUID>>()
-    private val mockEntityIterable = mock<List<ListEntity>>()
+    private val mockUuidIterable = mock<kotlin.collections.List<UUID>>()
+    private val mockEntityIterable = mock<kotlin.collections.List<List>>()
 
     @Test
     fun `Should build mock of the given repository`() {
@@ -112,7 +112,7 @@ class TestMockBuilderRepository {
 
     @Test
     fun `Should be able to override the return of a stubbed function`() {
-        val mockOptionalEntity = mock<Optional<ListEntity>>()
+        val mockOptionalEntity = mock<Optional<List>>()
 
         whenever(mockRepository.findById(ArgumentMatchers.any()))
             .thenReturn(mockOptionalEntity)

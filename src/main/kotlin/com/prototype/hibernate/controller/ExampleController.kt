@@ -1,6 +1,7 @@
 package com.prototype.hibernate.controller
 
 import com.prototype.hibernate.model.view.ActiveView
+import com.prototype.hibernate.model.view.AccountListView
 import com.prototype.hibernate.model.view.CustomView
 import com.prototype.hibernate.model.view.EmailView
 import com.prototype.hibernate.repository.crud.*
@@ -41,6 +42,11 @@ class ExampleController(
         @PathVariable email : String
     ) : Optional<CustomView> {
         return accountRepository.findByEmail(email, CustomView::class.java)
+    }
+
+    @GetMapping(value = ["/account_list_view"])
+    fun getAccountListView() : List<AccountListView> {
+        return accountRepository.getAccountListView()
     }
 
 }

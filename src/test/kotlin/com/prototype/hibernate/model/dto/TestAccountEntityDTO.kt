@@ -6,7 +6,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.junit.Assert.*
 
 @RunWith(SpringJUnit4ClassRunner::class)
-class TestAccountDTO {
+class TestAccountEntityDTO {
 
     private val accountDTO = AccountDTO(
         email = "some email",

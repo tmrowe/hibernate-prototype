@@ -7,7 +7,7 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-data class ListEntity (
+data class List (
 
     @Id
     @GeneratedValue
@@ -19,7 +19,7 @@ data class ListEntity (
 
     @OneToOne(optional = false)
     @JoinColumn
-    val createdBy : AccountEntity,
+    val createdBy : Account,
 
     @Column(
         unique = true,
@@ -34,6 +34,9 @@ data class ListEntity (
 
     @Column(nullable = false)
     @UpdateTimestamp
-    val updatedAt : LocalDateTime? = null
+    val updatedAt : LocalDateTime? = null,
+
+    @OneToMany(mappedBy = "list")
+    val accountList : Set<AccountList>? = null
 
 )

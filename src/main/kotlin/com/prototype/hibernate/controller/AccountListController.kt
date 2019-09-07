@@ -1,7 +1,7 @@
 package com.prototype.hibernate.controller
 
 import com.prototype.hibernate.model.dto.AccountListDTO
-import com.prototype.hibernate.model.entity.AccountListEntity
+import com.prototype.hibernate.model.entity.AccountList
 import com.prototype.hibernate.service.AccountListService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Sort
@@ -25,7 +25,7 @@ class AccountListController(
         @RequestParam accountUuid : UUID,
         @RequestParam listUuid : UUID,
         @RequestBody AccountListDTO : AccountListDTO
-    ) : AccountListEntity {
+    ) : AccountList {
         return accountListService.create(accountUuid, listUuid, AccountListDTO)
     }
 
@@ -35,7 +35,7 @@ class AccountListController(
         @RequestParam(defaultValue = "20") size: Int,
         @RequestParam(defaultValue = "uuid") sortField: Array<String>,
         @RequestParam(defaultValue = "DESC") sortDirection: Sort.Direction
-    ) : Page<AccountListEntity> {
+    ) : Page<AccountList> {
         return accountListService.findAll(page, size, sortDirection, sortField)
     }
 
@@ -43,7 +43,7 @@ class AccountListController(
     fun findByUuid(
         @PathVariable accountUuid: UUID,
         @PathVariable listUuid: UUID
-    ) : ResponseEntity<AccountListEntity> {
+    ) : ResponseEntity<AccountList> {
         val account = accountListService.findByUuid(accountUuid, listUuid)
         if (account.isPresent) {
             return ResponseEntity(account.get(), HttpStatus.OK)
@@ -60,7 +60,7 @@ class AccountListController(
         @PathVariable accountUuid: UUID,
         @PathVariable listUuid: UUID,
         @RequestBody accountListDTO : AccountListDTO
-    ) : AccountListEntity {
+    ) : AccountList {
         return accountListService.update(accountUuid, listUuid, accountListDTO)
     }
 

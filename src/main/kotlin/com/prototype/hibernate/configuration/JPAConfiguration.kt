@@ -9,12 +9,20 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 import javax.sql.DataSource
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
 
+/**
+ * This class is responsible for the global configuration of Java Persistence API (JPA), including data sources,
+ * transaction management, and naming strategies.
+ */
 @Configuration
 @EnableTransactionManagement
 class JPAConfiguration {
 
-    private val physicalNamingStrategy = PhysicalNamingStrategy::class.java.canonicalName
+    // TODO: Should we use this custom naming strategy?
+   // private val physicalNamingStrategy = PhysicalNamingStrategy::class.java.canonicalName
+
+    private val physicalNamingStrategy = SpringPhysicalNamingStrategy::class.java.canonicalName
     private val implicitNamingStrategy = SpringImplicitNamingStrategy::class.java.canonicalName
 
     @Bean

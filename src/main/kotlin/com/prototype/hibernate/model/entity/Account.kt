@@ -7,7 +7,7 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-data class AccountEntity (
+data class Account (
 
     @Id
     @GeneratedValue
@@ -32,6 +32,9 @@ data class AccountEntity (
 
     @Column(nullable = false)
     @UpdateTimestamp
-    val updatedAt : LocalDateTime? = null
+    val updatedAt : LocalDateTime? = null,
+
+    @OneToMany(mappedBy = "account")
+    val accountList : Set<AccountList>? = null
 
 )

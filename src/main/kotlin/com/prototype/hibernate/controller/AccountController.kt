@@ -1,7 +1,7 @@
 package com.prototype.hibernate.controller
 
 import com.prototype.hibernate.model.dto.AccountDTO
-import com.prototype.hibernate.model.entity.AccountEntity
+import com.prototype.hibernate.model.entity.Account
 import com.prototype.hibernate.service.IAccountService
 import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
@@ -23,7 +23,7 @@ class AccountController(
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun create(
         @RequestBody accountDTO : AccountDTO
-    ) : AccountEntity {
+    ) : Account {
         return accountService.create(accountDTO)
     }
 
@@ -33,7 +33,7 @@ class AccountController(
         @RequestParam(defaultValue = "20") size: Int,
         @RequestParam(defaultValue = "email") sortField: Array<String>,
         @RequestParam(defaultValue = "DESC") sortDirection: Sort.Direction
-    ) : Page<AccountEntity> {
+    ) : Page<Account> {
         return accountService.findAll(page, size, sortDirection, sortField)
     }
 
@@ -43,7 +43,7 @@ class AccountController(
         @RequestParam(defaultValue = "20") size: Int,
         @RequestParam(defaultValue = "email") sortField: Array<String>,
         @RequestParam(defaultValue = "DESC") sortDirection: Sort.Direction
-    ) : Page<AccountEntity> {
+    ) : Page<Account> {
         return accountService.findActive(page, size, sortDirection, sortField)
     }
 
@@ -53,14 +53,14 @@ class AccountController(
         @RequestParam(defaultValue = "20") size: Int,
         @RequestParam(defaultValue = "email") sortField: Array<String>,
         @RequestParam(defaultValue = "DESC") sortDirection: Sort.Direction
-    ) : Page<AccountEntity> {
+    ) : Page<Account> {
         return accountService.findInactive(page, size, sortDirection, sortField)
     }
 
     @GetMapping(value = ["/uuid/{uuid}"])
     fun findByUuid(
         @PathVariable uuid : UUID
-    ) : ResponseEntity<AccountEntity> {
+    ) : ResponseEntity<Account> {
         val account = accountService.findByUuid(uuid)
         if (account.isPresent) {
             return ResponseEntity(account.get(), HttpStatus.OK)
@@ -76,21 +76,14 @@ class AccountController(
     fun update(
         @PathVariable uuid : UUID,
         @RequestBody accountDTO : AccountDTO
-    ) : AccountEntity {
+    ) : Account {
         return accountService.update(uuid, accountDTO)
-    }
-
-    @DeleteMapping(value = ["/uuid/{uuid}"])
-    fun deleteByUuid(
-        @PathVariable uuid : UUID
-    ) {
-        return accountService.deleteByUuid(uuid)
     }
 
     @GetMapping(value = ["/email/{email}"])
     fun findByEmail(
         @PathVariable email : String
-    ) : ResponseEntity<AccountEntity> {
+    ) : ResponseEntity<Account> {
         val account = accountService.findByEmail(email)
         if (account.isPresent)
             return ResponseEntity(account.get(), HttpStatus.OK)

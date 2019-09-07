@@ -1,7 +1,7 @@
 package com.prototype.hibernate.model.dto
 
-import com.prototype.hibernate.model.entity.AccountEntity
-import com.prototype.hibernate.model.entity.ListEntity
+import com.prototype.hibernate.model.entity.Account
+import com.prototype.hibernate.model.entity.List
 import com.prototype.hibernate.model.entity.embeddable.AccountListId
 import com.prototype.hibernate.model.entity.embeddable.AccountListPermission
 import org.junit.Assert.*
@@ -14,8 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 class TestAccountListDTO {
 
     private val mockAccountListId = mock<AccountListId>()
-    private val mockAccountEntity = mock<AccountEntity>()
-    private val mockListEntity = mock<ListEntity>()
+    private val mockAccountEntity = mock<Account>()
+    private val mockListEntity = mock<List>()
 
     private val accountListDTO = AccountListDTO(
         permission = AccountListPermission(

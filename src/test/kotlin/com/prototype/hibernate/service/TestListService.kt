@@ -5,6 +5,7 @@ import org.junit.runner.RunWith
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.junit.Assert.*
 import com.nhaarman.mockito_kotlin.*
+import com.prototype.hibernate.mock.repository.crud.MockBuilderAccountListRepository
 import com.prototype.hibernate.model.dto.AccountListDTO
 import com.prototype.hibernate.model.dto.ListDTO
 import com.prototype.hibernate.model.entity.embeddable.AccountListPermission
@@ -20,10 +21,12 @@ class TestListService {
 
     private val mockBuilderListRepository = MockBuilderListRepository()
     private val mockBuilderAccountRepository = MockBuilderAccountRepository()
+    private val mockBuilderAccountListRepository = MockBuilderAccountListRepository()
     private val mockBuilderPageRequestFactory = MockBuilderPageRequestFactory()
 
     private val mockListRepository = mockBuilderListRepository.repository
     private val mockAccountRepository = mockBuilderAccountRepository.repository
+    private val mockAccountListRepository = mockBuilderAccountListRepository.repository
     private val mockAccountListService = mock<AccountListService>()
     private val mockPageRequestFactory = mockBuilderPageRequestFactory.pageRequestFactory
 
@@ -48,6 +51,7 @@ class TestListService {
         listService = ListService(
             mockListRepository,
             mockAccountRepository,
+            mockAccountListRepository,
             mockAccountListService,
             mockPageRequestFactory
         )
@@ -105,6 +109,7 @@ class TestListService {
     fun `ListService#deleteByUuid should call ListRepository#deleteById`() {
         listService.deleteByUuid(mockListUuid)
 
+        verify(mockAccountListRepository).deleteByListUuid(mockListUuid)
         verify(mockListRepository).deleteById(mockListUuid)
     }
 

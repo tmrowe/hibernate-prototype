@@ -8,18 +8,18 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-data class AccountListEntity (
+data class AccountList (
 
     @EmbeddedId
     val uuid : AccountListId,
 
     @ManyToOne
     @MapsId(value = "account_uuid")
-    val account : AccountEntity? = null,
+    val account : Account,
 
     @ManyToOne
     @MapsId(value = "list_uuid")
-    val list : ListEntity? = null,
+    val list : List,
 
     @Embedded
     val permission : AccountListPermission,

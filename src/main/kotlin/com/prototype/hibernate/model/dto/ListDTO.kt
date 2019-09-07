@@ -1,14 +1,14 @@
 package com.prototype.hibernate.model.dto
 
-import com.prototype.hibernate.model.entity.AccountEntity
-import com.prototype.hibernate.model.entity.ListEntity
+import com.prototype.hibernate.model.entity.Account
+import com.prototype.hibernate.model.entity.List
 
 data class ListDTO(
     val name : String,
     val description : String?
 ) {
 
-    fun toEntity(account : AccountEntity) = ListEntity(
+    fun toEntity(account : Account) = List(
         createdBy = account,
         name = name,
         description = description

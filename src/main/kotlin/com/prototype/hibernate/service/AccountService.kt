@@ -1,7 +1,7 @@
 package com.prototype.hibernate.service
 
 import com.prototype.hibernate.model.dto.AccountDTO
-import com.prototype.hibernate.model.entity.AccountEntity
+import com.prototype.hibernate.model.entity.Account
 import com.prototype.hibernate.repository.crud.AccountRepository
 import com.prototype.hibernate.service.utility.PageRequestFactory
 import org.springframework.data.domain.Page
@@ -16,7 +16,7 @@ class AccountService(
     private val pageRequestFactory : PageRequestFactory
 ) : IAccountService {
 
-    override fun create(accountDTO : AccountDTO) : AccountEntity {
+    override fun create(accountDTO : AccountDTO) : Account {
         val account = accountDTO.toEntity()
         return accountRepository.save(account)
     }
@@ -26,7 +26,7 @@ class AccountService(
         size : Int,
         sortDirection : Sort.Direction,
         sortField: Array<String>
-    ) : Page<AccountEntity> {
+    ) : Page<Account> {
         val pageRequest = pageRequestFactory.build(page, size, sortDirection, sortField)
         return accountRepository.findAll(pageRequest)
     }
@@ -36,9 +36,9 @@ class AccountService(
         size : Int,
         sortDirection : Sort.Direction,
         sortField: Array<String>
-    ) : Page<AccountEntity> {
+    ) : Page<Account> {
         val pageRequest = pageRequestFactory.build(page, size, sortDirection, sortField)
-        return accountRepository.findByActiveTrue(pageRequest, AccountEntity::class.java)
+        return accountRepository.findByActiveTrue(pageRequest, Account::class.java)
     }
 
     override fun findInactive(
@@ -46,31 +46,27 @@ class AccountService(
         size : Int,
         sortDirection : Sort.Direction,
         sortField: Array<String>
-    ) : Page<AccountEntity> {
+    ) : Page<Account> {
         val pageRequest = pageRequestFactory.build(page, size, sortDirection, sortField)
-        return accountRepository.findByActiveFalse(pageRequest, AccountEntity::class.java)
+        return accountRepository.findByActiveFalse(pageRequest, Account::class.java)
     }
 
-    override fun findByUuid(uuid : UUID) : Optional<AccountEntity> {
+    override fun findByUuid(uuid : UUID) : Optional<Account> {
         return accountRepository.findById(uuid)
     }
 
-    override fun findByEmail(email : String) : Optional<AccountEntity> {
-        return accountRepository.findByEmail(email, AccountEntity::class.java)
+    override fun findByEmail(email : String) : Optional<Account> {
+        return accountRepository.findByEmail(email, Account::class.java)
     }
 
     @Transactional
-    override fun update(uuid : UUID, accountDTO : AccountDTO) : AccountEntity {
+    override fun update(uuid : UUID, accountDTO : AccountDTO) : Account {
         val account = accountRepository.findById(uuid).get()
         val updatedAccount = account.copy(
             active = accountDTO.active,
             email = accountDTO.email
         )
         return accountRepository.save(updatedAccount)
-    }
-
-    override fun deleteByUuid(uuid : UUID) {
-        return accountRepository.deleteById(uuid)
     }
 
 }

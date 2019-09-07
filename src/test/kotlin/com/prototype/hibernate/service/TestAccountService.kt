@@ -4,13 +4,11 @@ import com.nhaarman.mockito_kotlin.*
 import com.prototype.hibernate.mock.repository.crud.MockBuilderAccountRepository
 import com.prototype.hibernate.mock.service.utility.MockBuilderPageRequestFactory
 import com.prototype.hibernate.model.dto.AccountDTO
-import com.prototype.hibernate.model.entity.AccountEntity
-import com.prototype.hibernate.model.view.EmailView
+import com.prototype.hibernate.model.entity.Account
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.junit.Assert.*
-import org.springframework.data.domain.Page
 import org.springframework.data.domain.Sort
 
 @RunWith(SpringJUnit4ClassRunner::class)
@@ -69,7 +67,7 @@ class TestAccountService {
         val result = accountService.findActive(page, size, sortDirection, sortField)
 
         verify(mockPageRequestFactory).build(page, size, sortDirection, sortField)
-        verify(mockAccountRepository).findByActiveTrue(mockPageRequest, AccountEntity::class.java)
+        verify(mockAccountRepository).findByActiveTrue(mockPageRequest, Account::class.java)
         assertEquals(mockPage, result)
     }
 
@@ -78,7 +76,7 @@ class TestAccountService {
         val result = accountService.findInactive(page, size, sortDirection, sortField)
 
         verify(mockPageRequestFactory).build(page, size, sortDirection, sortField)
-        verify(mockAccountRepository).findByActiveFalse(mockPageRequest, AccountEntity::class.java)
+        verify(mockAccountRepository).findByActiveFalse(mockPageRequest, Account::class.java)
         assertEquals(mockPage, result)
     }
 
@@ -94,7 +92,7 @@ class TestAccountService {
     fun `AccountService#findByEmail should call AccountRepository#findByEmail`() {
         val result = accountService.findByEmail(email)
 
-        verify(mockAccountRepository).findByEmail(email, AccountEntity::class.java)
+        verify(mockAccountRepository).findByEmail(email, Account::class.java)
         assertEquals(mockOptionalAccountEntity, result)
     }
 
@@ -108,13 +106,6 @@ class TestAccountService {
         )
         verify(mockAccountRepository).save(mockAccountEntity)
         assertEquals(mockAccountEntity, result)
-    }
-
-    @Test
-    fun `AccountService#deleteByUuid should call AccountRepository#deleteById`() {
-        accountService.deleteByUuid(mockUuid)
-
-        verify(mockAccountRepository).deleteById(mockUuid)
     }
 
 }

@@ -1,7 +1,7 @@
 package com.prototype.hibernate.controller
 
 import com.prototype.hibernate.model.dto.ListDTO
-import com.prototype.hibernate.model.entity.ListEntity
+import com.prototype.hibernate.model.entity.List
 import com.prototype.hibernate.service.ListService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Sort
@@ -25,7 +25,7 @@ class ListController(
     fun create(
         @RequestParam createdByUuid : UUID,
         @RequestBody listDTO : ListDTO
-    ) : ListEntity {
+    ) : List {
         return listService.create(createdByUuid, listDTO)
     }
 
@@ -35,14 +35,14 @@ class ListController(
         @RequestParam(defaultValue = "20") size: Int,
         @RequestParam(defaultValue = "name") sortField: Array<String>,
         @RequestParam(defaultValue = "DESC") sortDirection: Sort.Direction
-    ) : Page<ListEntity> {
+    ) : Page<List> {
         return listService.findAll(page, size, sortDirection, sortField)
     }
 
     @GetMapping(value = ["/uuid/{uuid}"])
     fun findByUuid(
         @PathVariable uuid : UUID
-    ) : ResponseEntity<ListEntity> {
+    ) : ResponseEntity<List> {
         val account = listService.findByUuid(uuid)
         if (account.isPresent) {
             return ResponseEntity(account.get(), HttpStatus.OK)
@@ -58,7 +58,7 @@ class ListController(
     fun update(
         @PathVariable uuid : UUID,
         @RequestBody listDTO : ListDTO
-    ) : ListEntity {
+    ) : List {
         return listService.update(uuid, listDTO)
     }
 
