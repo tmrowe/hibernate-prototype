@@ -20,7 +20,7 @@ class ListController(
     private val listService : ListService
 ) {
 
-    // TODO: Once we have awareness of the user making the request we can use that uuid rather than passing it in.
+    // Once we have awareness of the user making the request we can use that uuid rather than passing it in.
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun create(
         @RequestParam createdByUuid : UUID,

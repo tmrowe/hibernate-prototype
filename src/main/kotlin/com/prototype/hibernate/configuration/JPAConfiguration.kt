@@ -19,9 +19,6 @@ import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
 @EnableTransactionManagement
 class JPAConfiguration {
 
-    // TODO: Should we use this custom naming strategy?
-   // private val physicalNamingStrategy = PhysicalNamingStrategy::class.java.canonicalName
-
     private val physicalNamingStrategy = SpringPhysicalNamingStrategy::class.java.canonicalName
     private val implicitNamingStrategy = SpringImplicitNamingStrategy::class.java.canonicalName
 
