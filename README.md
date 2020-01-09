@@ -87,8 +87,6 @@ a controller as we would any other.
 
 We are using [Spring Data](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/) at this layer.
 
-
-
 ### Service
 This layer should compose together functionality defined in the repositories, other services, and components to achieve
 business requirements. Transformation between DTOs and Entities should occur at this layer.
