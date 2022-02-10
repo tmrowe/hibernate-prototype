@@ -31,7 +31,7 @@
         <spring-boot.version>2.1.7.RELEASE</spring-boot.version>
         <spring.version>5.1.9.RELEASE</spring.version>
         <flyway-version>5.2.4</flyway-version>
-        <postgresql.version>9.3-1100-jdbc41</postgresql.version>
+        <postgresql.version>42.2.25</postgresql.version>
         <hibernate.version>5.4.4.Final</hibernate.version>
         <tomcat-dbcp.version>9.0.24</tomcat-dbcp.version>
         <jackson.version>2.9.9</jackson.version>
